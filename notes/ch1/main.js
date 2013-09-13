@@ -26,7 +26,8 @@ require(["jam", "../lib/sylvester", "cg.js"], function(jam, syl, cg) {
       }
 	  if(jam.Input.justPressed("MOUSE_LEFT")){
         p.push(jam.Input.mouse);
-        console.log(s);
+        var point = new cg.point(jam.Input.mouse.x, jam.Input.mouse.y);
+        scene.add(point);
       }
     });
 
