@@ -6,17 +6,28 @@ require(["jam", "../lib/sylvester", "cg.js"], function(jam, syl, cg) {
   jam.config({dataDir:"data/"});
 
   var main = function() {
-	var g = new jam.Game(320, 240, document.body, 2);
+	var g = new jam.Game(640, 480, document.body);
 	var scene = g.root.scene;
 
     var p = [];
     var s;
+    /** /
+    var txt = jam.Text(20, 20);
+    txt.font = "20pt monospace";
+    txt.color = "#000";
+    text.text = 'hi';
+    /**/
 	scene.on("update", function(dt) {
       if (p.length > 2){
-        s = cg.detSide(p.pop(), p.pop(), p.pop());
-        if (s > 0){
+        var poi = p.pop();
+        var t = p.pop();
+        var o = p.pop();
+        s = cg.detSide(o, t, poi);
+        var l = new cg.line(o.x, o.y, t.x, t.y);
+        scene.add(l);
+        if (s < 0){
           console.log("LEFT");
-        } else if (s < 0){
+        } else if (s > 0){
           console.log("RIGHT");
         } else if (s === 0){
           console.log("COLINE");
