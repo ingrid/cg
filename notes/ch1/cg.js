@@ -20,7 +20,18 @@ define(["sprite", "vector"], function(Sprite, Vector) {
 
   var hps = Math.floor(ps/2);
 
-  mod.point = function(x, y){
+  mod.point = function(x, y, color){
+    if (color === "undefined"){
+      // Not needed actually.
+      color = "#000";
+    } else {
+      var can = document.createElement("canvas");
+      can.width = ps;
+      can.height = ps;
+      var con = can.getContext("2d");
+      con.fillStyle = color;
+      con.fillRect(0, 0, ps, ps);
+    }
     Sprite.call(this, x - hps, y - hps);
     this.image = can;
     this.width = can.width;
@@ -29,10 +40,7 @@ define(["sprite", "vector"], function(Sprite, Vector) {
 
   mod.point.prototype = new Sprite(0, 0);
 
-  mod.line = function(ox, oy, tx, ty, color){
-    if (color === "undefined"){
-      color = "#000";
-    }
+  mod.line = function(ox, oy, tx, ty){
     var x = Math.min(ox, tx);
     var y = Math.min(oy, ty);
 
@@ -56,7 +64,7 @@ define(["sprite", "vector"], function(Sprite, Vector) {
     this.width = w;
     this.height = h;
 
-    this.end = new mod.point(tx, ty, "#0FF");
+    this.end = new mod.point(tx, ty, "#000");
     this.add(this.end);
   };
 

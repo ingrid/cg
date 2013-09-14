@@ -11,13 +11,15 @@ require(["jam", "../lib/sylvester", "cg.js"], function(jam, syl, cg) {
 
     var p = [];
     var s;
-    /** /
-    var txt = jam.Text(20, 20);
+
+    var txt = new jam.Text(20, 20);
     txt.font = "20pt monospace";
     txt.color = "#000";
-    text.text = 'hi';
-    /**/
+    txt.text = 'hi';
+    scene.add(txt);
+
 	scene.on("update", function(dt) {
+      txt.text = jam.Input.mouse;
       if (p.length > 2){
         var poi = p.pop();
         var t = p.pop();
@@ -25,6 +27,7 @@ require(["jam", "../lib/sylvester", "cg.js"], function(jam, syl, cg) {
         s = cg.detSide(o, t, poi);
         var l = new cg.line(o.x, o.y, t.x, t.y);
         scene.add(l);
+        scene.add(l.end);
         if (s < 0){
           console.log("LEFT");
         } else if (s > 0){
@@ -37,7 +40,7 @@ require(["jam", "../lib/sylvester", "cg.js"], function(jam, syl, cg) {
       }
 	  if(jam.Input.justPressed("MOUSE_LEFT")){
         p.push(jam.Input.mouse);
-        var point = new cg.point(jam.Input.mouse.x, jam.Input.mouse.y);
+        var point = new cg.point(jam.Input.mouse.x, jam.Input.mouse.y, "red");
         scene.add(point);
       }
     });
