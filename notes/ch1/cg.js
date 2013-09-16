@@ -1,4 +1,4 @@
-define(["sprite", "vector"], function(Sprite, Vector) {
+define(["sprite", "vector", "debug"], function(Sprite, Vector, Debug) {
   var mod = {};
   mod.detSide = function(o, t, p){
     // Cross product.
@@ -64,8 +64,11 @@ define(["sprite", "vector"], function(Sprite, Vector) {
     this.width = w;
     this.height = h;
 
-    this.end = new mod.point(tx, ty, "#000");
+    this.end = new mod.point(tx - (x + Math.floor(w/2)),
+                             ty - (y + Math.floor(h/2)),
+                             "#000");
     this.add(this.end);
+
   };
 
   mod.line.prototype = new Sprite(0, 0);
